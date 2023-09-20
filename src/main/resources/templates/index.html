@@ -3,36 +3,71 @@
 
 <head>
     <meta charset="UTF-8">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link th:replace="/fragments/bootstrap-style :: bootstrap">
+    <link th:replace="/fragments/bootstrap-style :: style">
+    <link th:replace="/fragments/bootstrap-style :: font-awsome">
+    <link th:replace="/fragments/bootstrap-style :: animate">
     <title>Home</title>
 </head>
 <body>
 <div class="container">
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-            <img src="https://avatars.githubusercontent.com/u/3904529?s=280&v=4" alt="logo" height="50" width="50">
-        </a>
-
-        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-            <li><a th:href="'/'" class="nav-link px-2 link-secondary">Home</a></li>
-            <li><a th:if="${username}" th:href="'/profile/' + ${username}" class="nav-link px-2 link-dark">profile</a></li>
-        </ul>
-
-        <div class="col-md-3 text-end">
-            <h5 th:if="${username}" th:text ="${username}" class="text-dark"></h5>
-            <a th:if="!${username}" class="btn btn-outline-danger text-decoration-none" th:href="'/login'">Login</a>
-            <a th:if="!${username}" class="btn btn-outline-dark text-decoration-none" th:href="'/signup'">Sign up</a>
-                <form th:if="${username}" th:action="'/perform_logout'">
-                    <button class="btn btn-sm btn-dark" type="submit"> Log out</button>
-                </form>
+    <header th:replace="/fragments/header-nav :: header"></header>
+    <div class="container my-5 bg-dark animate__animated animate__bounceInRight">
+        <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
+            <div class="col-lg-7 p-3 p-lg-5 pt-lg-3">
+                <h1 class="display-4 fw-bold lh-1 text-light">Create. Share. Connect.</h1>
+                <p class="lead text-light">
+                    Welcome to our platform where you can unleash your creativity, share your thoughts, and connect with
+                    an inspiring community of users. Start sharing your unique journey today!</p>
+            </div>
+            <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
+                <img class="rounded-lg-3" th:src="@{/images/hero.PNG}" alt="" width="720">
+            </div>
         </div>
-    </header>
+    </div>
+    <div class="container px-4 py-5 bg-dark animate__animated animate__backInLeft" id="featured-3">
+        <h2 class="pb-2 border-bottom text-light">Features</h2>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-2 mb-3">
+                    <i class="fa-solid fa-right-to-bracket fa-fade" style="color: #ffffff;"></i>
+                </div>
+                <h3 class="fs-2 text-light">User Authentication and Authorization:</h3>
+                <p class="text-light">Allow users to create accounts (sign up) and log in. Implement a secure
+                    authentication system that verifies user credentials and provides appropriate access based on their
+                    roles or permissions.</p>
+                <a th:href="@{/signup}" class="icon-link d-inline-flex text-decoration-none link-info align-items-center text-light">
+                    Sign up now
+
+                </a>
+            </div>
+            <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-2 mb-3">
+                    <i class="fa-solid fa-user fa-fade" style="color: #ffffff;"></i>
+                </div>
+                <h3 class="fs-2 text-light">User Profile:</h3>
+                <p class="text-light">Implement user profiles where users can view and edit their personal information,
+                    including their username, bio, date of birth, and any other relevant details. Additionally, users
+                    should be able to view their own posts and potentially edit or delete them from their profile.</p>
+                <a th:href="@{'/profile/'+${username}}" class="icon-link d-inline-flex align-items-center text-decoration-none link-info text-light">
+                    Show Profile
+                </a>
+            </div>
+            <div class="feature col">
+                <div class="feature-icon d-inline-flex align-items-center justify-content-center  fs-2 mb-3">
+                    <i class="fa-solid fa-plus fa-fade" style="color: #ffffff;"></i>
+                </div>
+                <h3 class="fs-2 text-light">Post Creation and Viewing:
+                </h3>
+                <p class="text-light">Users Can Craete posts and delete them also view another users posts</p>
+                <a th:href="@{'/profile/'+${username}}" class="icon-link d-inline-flex text-decoration-none link-info align-items-center text-light">
+                    Your posts
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+<script th:replace="/fragments/scripts :: bootstrap"></script>
 </body>
 </html>

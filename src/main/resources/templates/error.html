@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link th:replace="/fragments/bootstrap-style :: bootstrap">
+    <link th:replace="/fragments/bootstrap-style :: style">
+    <title th:text="${error}">error</title>
+</head>
+<body>
+<div class="bg-dark text-secondary px-4 py-5 text-center">
+    <div class="py-5">
+        <h1 class="display-5 fw-bold text-white">404</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="fs-5 mb-4">Sorry The page You are looking for is <span th:text="${error}"></span></p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a class="btn btn-light text-decoration-none" th:href="@{'/'}">Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

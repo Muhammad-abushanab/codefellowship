@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.ServletException;
@@ -86,21 +87,29 @@ public class ApplicationUserController {
                                 @RequestParam("bio") String bio,
                                 @RequestParam("firstName") String firstName,
                                 @RequestParam("lastName") String lastName,
-                                @RequestParam("dateOfBirth") String dateOfBirth) throws ParseException {
-        ApplicationUser user = new ApplicationUser();
-        user.setUserName(userName);
-        user.setFirstName(firstName);
-        user.setBio(bio);
-        user.setLastName(lastName);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setLocalDate(LocalDate.now());
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(dateFormat);
-        Date date = dateFormat.parse(dateOfBirth);
-        user.setDob(date);
-        applicationUserRepo.save(user);
-        authWithHttpServletRequest(userName, password);
-        return new RedirectView("/");
+                                @RequestParam("dateOfBirth") String dateOfBirth, RedirectAttributes rdr) throws ParseException {
+        ApplicationUser existingUser = applicationUserRepo.findByUserName(userName);
+        if (existingUser == null) {
+            ApplicationUser user = new ApplicationUser();
+            user.setUserName(userName);
+            user.setFirstName(firstName);
+            user.setBio(bio);
+            user.setLastName(lastName);
+            user.setPassword(passwordEncoder.encode(password));
+            user.setLocalDate(LocalDate.now());
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            System.out.println(dateFormat);
+            Date date = dateFormat.parse(dateOfBirth);
+            user.setDob(date);
+            applicationUserRepo.save(user);
+            authWithHttpServletRequest(userName, password);
+            return new RedirectView("/");
+        } else {
+            rdr.addFlashAttribute("userExist", "Username Already Exist");
+            return new RedirectView("/signup");
+        }
+
+
     }
 
     public void authWithHttpServletRequest(String username, String password) {

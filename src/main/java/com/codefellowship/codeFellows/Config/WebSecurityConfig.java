@@ -33,6 +33,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/images/**").permitAll()
+                .antMatchers("/js/**").permitAll()
                 .antMatchers("/", "/login", "/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -41,7 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .loginProcessingUrl("/perform_login")
                 .defaultSuccessUrl("/", true)
-                .failureUrl("/login?error=true") // Update the failure URL
+                .failureUrl("/login?error=true")
                 .and()
                 .logout()
                 .logoutUrl("/perform_logout")
