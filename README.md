@@ -5,14 +5,16 @@ The user can log in and signup.
 
 ## Routes
 
-| HTTP Method | Path                | Description                                  |
-|-------------|---------------------|----------------------------------------------|
-| GET         | /login              | Display the login page.                      |
-| GET         | /logout             | logs the user out.                           |
-| GET         | /signup             | Display the signup page.                     |
-| GET         | /                   | Display the home page with user information. |
-| POST        | /signup             | Add a new user (signup).                     |
-| GET         | /profile/{username} | Displays the user information                |
+| HTTP Method | Path                     | Description                                  |
+|-------------|--------------------------|----------------------------------------------|
+| GET         | /login                   | Display the login page.                      |
+| GET         | /logout                  | logs the user out.                           |
+| GET         | /signup                  | Display the signup page.                     |
+| GET         | /                        | Display the home page with user information. |
+| POST        | /signup                  | Add a new user (signup).                     |
+| GET         | /profile/{username}      | Displays the user information                |
+| POST        | /posts/create/{username} | Save a new post for the specified username   |
+| DELETE      | /post/delete/{id}        | Delete a post by its ID                      |
 
 ## Requirements
 
@@ -28,3 +30,10 @@ The user can log in and signup.
 - update the username and password based on your postgres credit
   run the application.
 - go to your browser and type `localhost:8080`
+
+## Features
+
+- Authentication and authorization : users can sign up and log in into the web site
+- Post creation and deletion : users can add posts and delete it 
+- Profile view and editing : users can view their profile and edit it 
+**NOTE users can not change their username**

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -32,6 +33,9 @@ public class ApplicationUser implements UserDetails {
 
     @Column(name = "localDate")
     private LocalDate localDate;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Posts> posts;
 
     public ApplicationUser() {
 
@@ -133,5 +137,13 @@ public class ApplicationUser implements UserDetails {
 
     public long getId() {
         return id;
+    }
+
+    public List<Posts> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Posts> posts) {
+        this.posts = posts;
     }
 }
