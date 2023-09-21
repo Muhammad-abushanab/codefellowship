@@ -1,3 +1,8 @@
+body {
+margin : 0;
+padding: 0;
+box-sizing: border-box;
+}
 .nav-link:hover {
 border-bottom : solid #CF3328 2px;
 }
@@ -38,4 +43,37 @@ border-bottom : solid #CF3328 2px;
 
     .btn-primary:hover {
         background-color: #0056b3;
+    }
+
+    .card {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 20px;
+    }
+
+
+    .card-title h4 {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #333333;
+      margin: 0;
+    }
+
+
+    .card-body a {
+      color: #007BFF;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+
+    .card-body a:hover {
+      text-decoration: underline;
+    }
+
+
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      transition: box-shadow 0.3s ease-in-out;
     }

@@ -5,12 +5,13 @@
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
         <li><a th:href="'/'" class="nav-link px-2 link-danger text-light">Home</a></li>
-        <li><a th:if="${username}" th:href="'/profile/' + ${username}" class="nav-link px-2 text-light link-danger">profile</a></li>
+        <li><a th:if="${username}" th:href="'/profile/' + ${#authentication.principal.username}" class="nav-link px-2 text-light link-danger">profile</a></li>
+        <li><a th:if="${username}" th:href="'/profile/all'" class="nav-link px-2 text-light link-danger">Users</a></li>
     </ul>
 
     <div class="col-md-3 text-end">
         <div th:if="${username}" class="d-flex justify-content-end">
-            <h5  th:text ="${username}" class="text-light mx-2"></h5>
+            <h5  th:text ="${#authentication.principal.username}" class="text-light mx-2"></h5>
             <img  src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
         </div>
         <a th:if="!${username}" class="btn btn-outline-danger text-decoration-none" th:href="'/login'">Login</a>
