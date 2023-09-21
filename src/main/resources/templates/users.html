@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:replace="/fragments/bootstrap-style :: bootstrap">
+    <link th:replace="/fragments/bootstrap-style :: style">
+    <link th:replace="/fragments/bootstrap-style :: font-awsome">
+    <title>User Registration Form</title>
+</head>
+<body>
+<div class="container">
+    <header th:replace="/fragments/header-nav :: header"></header>
+</div>
+<div class="container">
+    <div th:if="${users}" class="row">
+        <div th:each="user : ${users}" class="col-lg-3 col-md-10 col-sm-12 text-capitalize">
+            <div class="card border-0">
+                <div class="card-title">
+                    <div class="d-flex justify-content-between">
+                        <h4 th:if="${user.username == #authentication.principal.username}" th:text="Me"></h4>
+                        <h4 th:unless="${user.username == #authentication.principal.username}" th:text="${user.username}"></h4>
+                        <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <a th:href="'/profile/' + ${user.username}" class="link-warning">Show
+                        profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:replace="/fragments/scripts :: bootstrap"></script>
+</body>
+</html>

@@ -36,7 +36,7 @@
                 <p class="text-light">Allow users to create accounts (sign up) and log in. Implement a secure
                     authentication system that verifies user credentials and provides appropriate access based on their
                     roles or permissions.</p>
-                <a th:href="@{/signup}" class="icon-link d-inline-flex text-decoration-none link-info align-items-center text-light">
+                <a th:href="@{/signup}" class="icon-link d-inline-flex text-decoration-none link-info align-items-center text-warning">
                     Sign up now
 
                 </a>
@@ -49,7 +49,7 @@
                 <p class="text-light">Implement user profiles where users can view and edit their personal information,
                     including their username, bio, date of birth, and any other relevant details. Additionally, users
                     should be able to view their own posts and potentially edit or delete them from their profile.</p>
-                <a th:href="@{'/profile/'+${username}}" class="icon-link d-inline-flex align-items-center text-decoration-none link-info text-light">
+                <a th:href="@{'/profile/'+${username}}" class="icon-link d-inline-flex align-items-center text-decoration-none link-info text-warning">
                     Show Profile
                 </a>
             </div>
@@ -59,8 +59,8 @@
                 </div>
                 <h3 class="fs-2 text-light">Post Creation and Viewing:
                 </h3>
-                <p class="text-light">Users Can Craete posts and delete them also view another users posts</p>
-                <a th:href="@{'/profile/'+${username}}" class="icon-link d-inline-flex text-decoration-none link-info align-items-center text-light">
+                <p class="text-light">Users Can Create posts and delete them also view another users posts</p>
+                <a th:href="@{'/profile/'+${username}}" class="icon-link d-inline-flex text-decoration-none link-info align-items-center text-warning">
                     Your posts
                 </a>
             </div>

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ProfileController {
@@ -24,19 +25,19 @@ public class ProfileController {
 
 
     @GetMapping("/profile/{username}")
-    public String getUserProfile(@PathVariable("username") String username, Model profielModel,Principal p) {
-            ApplicationUser user = applicationUserRepo.findByUserName(username);
-            if (user != null) {
-                profielModel.addAttribute("username", username);
-                profielModel.addAttribute("dateOfBirth", user.getDob());
-                profielModel.addAttribute("firstName", user.getFirstName());
-                profielModel.addAttribute("lastName", user.getLastName());
-                profielModel.addAttribute("bio", user.getBio());
-                profielModel.addAttribute("posts", user.getPosts());
-                System.out.println(user.getPosts());
-                return "profile";
-            }
-            return "redirect:/profile/" + p.getName();
+    public String getUserProfile(@PathVariable("username") String username, Model profielModel, Principal p) {
+        ApplicationUser user = applicationUserRepo.findByUserName(username);
+        if (user != null) {
+            profielModel.addAttribute("username", username);
+            profielModel.addAttribute("dateOfBirth", user.getDob());
+            profielModel.addAttribute("firstName", user.getFirstName());
+            profielModel.addAttribute("lastName", user.getLastName());
+            profielModel.addAttribute("bio", user.getBio());
+            profielModel.addAttribute("posts", user.getPosts());
+            System.out.println(user.getPosts());
+            return "profile";
+        }
+        return "redirect:/profile/" + p.getName();
 
     }
 
@@ -62,5 +63,15 @@ public class ProfileController {
             return new RedirectView("/profile/" + p.getName());
         }
 
+    }
+
+    @GetMapping("/profile/all")
+    public String getAllUsers(Model usersModel , Principal p) {
+        List<ApplicationUser> users = applicationUserRepo.findAll();
+        if (!users.isEmpty()) {
+            usersModel.addAttribute("users", users);
+            usersModel.addAttribute("username", p.getName());
+        }
+        return "users";
     }
 }
