@@ -17,16 +17,32 @@
             <div class="alert alert-primary" th:text="${Error}"></div>
         </div>
     </div>
-    <form id="profileForm" th:action="'/profile/' + ${username} + '/edit'" th:method="PUT">
-        <div class="row">
-            <div class="col-md-4">
-                <h3>User Information</h3>
-                <hr>
-                <p><strong th:text="'User Name : ' + ${username}">Name:</strong></p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="d-flex flex-column">
+                <div class="wrap">
+                    <h3>User Information</h3>
+                    <hr>
+                    <p><strong th:text="'User Name : ' + ${username}">Name:</strong></p>
+                </div>
+                <div class="wrap">
+                    <a  id="follow" th:data-username="${username}"
+                       onclick="followUser(this)"
+                       class="btn w-100 btn-warning text-decoration-none">Follow</a>
+
+                </div>
+
+            </div>
+
+            <div class="card">
                 <img src="https://e7.pngegg.com/pngimages/550/997/png-clipart-user-icon-foreigners-avatar-child-face.png"
                      class="img-fluid" alt="...">
             </div>
-            <div class="col-md-8">
+        </div>
+
+        <div class="col-md-8">
+            <form id="profileForm" th:action="'/profile/' + ${username} + '/edit'" th:method="PUT">
                 <div class="d-flex justify-content-between">
                     <h3>User Details</h3>
                     <button th:if="${username == #authentication.principal.username}" type="button" class="btn btn-dark"
@@ -35,13 +51,13 @@
                     </button>
                 </div>
                 <hr>
-                <div class="card border-2 border-black">
+                <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">About Me</h5>
                         <textarea class="form-control" id="bio" name="bio" th:text="${bio}" disabled></textarea>
                     </div>
                 </div>
-                <div class="card border-2 border-black mt-3">
+                <div class="card mt-3">
                     <div class="card-body">
                         <h5 class="card-title">More Information</h5>
                         <ul class="list-group">
@@ -66,9 +82,11 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
-    </form>
+
+    </div>
+
     <div class="row">
         <div th:if="${username == #authentication.principal.username}" class="col-md-4">
             <h3 class="text-dark mb-2">Post What's on your mind</h3>
@@ -103,10 +121,8 @@
         </div>
     </div>
 </div>
-<script>
-
-</script>
 <script th:replace="/fragments/scripts :: bootstrap"></script>
 <script th:replace="/fragments/scripts :: editProfile"></script>
+<script th:replace="/fragments/scripts :: follow"></script>
 </body>
 </html>

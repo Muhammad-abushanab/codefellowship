@@ -5,9 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -34,8 +32,16 @@ public class ApplicationUser implements UserDetails {
     @Column(name = "localDate")
     private LocalDate localDate;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Posts> posts;
+
+    @ManyToMany
+    @JoinTable(name = "followers",
+            joinColumns = {@JoinColumn(name = "userId")}, inverseJoinColumns = {@JoinColumn(name = "followerId")})
+    private Set<ApplicationUser> following = new HashSet<>();
+
+    @ManyToMany(mappedBy = "following")
+    private Set<ApplicationUser> followers = new HashSet<>();
 
     public ApplicationUser() {
 
@@ -85,6 +91,22 @@ public class ApplicationUser implements UserDetails {
     @Override
     public String getUsername() {
         return userName;
+    }
+
+    public Set<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Set<ApplicationUser> following) {
+        this.following = following;
+    }
+
+    public Set<ApplicationUser> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<ApplicationUser> followers) {
+        this.followers = followers;
     }
 
     public void setUserName(String userName) {
@@ -141,6 +163,14 @@ public class ApplicationUser implements UserDetails {
 
     public List<Posts> getPosts() {
         return posts;
+    }
+
+    public void addFollowing(ApplicationUser user) {
+        this.following.add(user);
+    }
+
+    public void addFollower(ApplicationUser user) {
+        this.followers.add(user);
     }
 
     public void setPosts(List<Posts> posts) {

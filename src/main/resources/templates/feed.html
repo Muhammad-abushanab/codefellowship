@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link th:replace="/fragments/bootstrap-style :: bootstrap">
+    <link th:replace="/fragments/bootstrap-style :: style">
+    <link th:replace="/fragments/bootstrap-style :: font-awsome">
+    <link th:replace="/fragments/bootstrap-style :: animate">
+    <title>feed</title>
+</head>
+<body>
+<div class="container">
+    <header th:replace="/fragments/header-nav :: header"></header>
+    <div class="container">
+        <div class="row">
+            <div th:each="post : ${posts}" class="col-sm-12 col-md-8 col-lg-6">
+                <div class="card flex-row justify-content-between">
+                    <div class="card-title">
+                        <a th:href="'/profile/'+${post.user.username}" class="fs-3 text-warning link-primary text-decoration-none" th:text="${post.user.username}"></a>
+                        <div class="d-flex">
+                            <i class="fa-solid fa-clock me-1 mt-1"></i>
+                            <p th:text="${post.user.localDate}" class="fs-6"></p>
+                        </div>
+                        <p class="fs-6" th:text="${post.body}"></p>
+                    </div>
+                    <div class="card-image"><img src="https://github.com/mdo.png" width="32" height="32" class="rounded"
+                                                 alt="user-image"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:replace="/fragments/scripts :: bootstrap"></script>
+</body>
+</html>

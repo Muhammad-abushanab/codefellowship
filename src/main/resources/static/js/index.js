@@ -5,6 +5,8 @@ let form = document.getElementById("#profileForm");
  if(btn.innerText.trim() === 'Save Changes'){
       btn.setAttribute("type","submit");
   }
+  btn.classList.remove("btn-dark");
+  btn.classList.add("btn-danger");
   document.querySelector("#bio").removeAttribute("disabled");
   inputFields.forEach(function(input){
     input.removeAttribute("disabled");
