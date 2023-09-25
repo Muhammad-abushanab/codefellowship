@@ -15,6 +15,9 @@ The user can log in and signup.
 | GET         | /profile/{username}      | Displays the user information                |
 | POST        | /posts/create/{username} | Save a new post for the specified username   |
 | DELETE      | /post/delete/{id}        | Delete a post by its ID                      |
+| POST      | //follow/{username}        | Follow user    by his username                    |
+| POST      | /unfollow/{username}        | Unfollow user by his username                      |
+| GET      | /feed        | get all posts from followed users                      |
 
 ## Requirements
 
